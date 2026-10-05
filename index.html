@@ -699,7 +699,7 @@
     {
       num: '04',
       title: 'Вставьте промпт и дождитесь генерации',
-      desc: 'Скопируйте отредактированный промпт из блока ниже. ИИ создаст полный HTML/CSS/JS код.',
+      desc: 'Скопируйте отредактированный промпт из блока выше. ИИ создаст полный HTML/CSS/JS код.',
       img: null
     },
     {
@@ -738,13 +738,13 @@
     {
       num: '01',
       title: 'Зарегистрируйтесь на github.com',
-      desc: 'Нужна только почта. Никнейм станет частью адреса сайта: <code>ник.github.io</code> — выбирайте читаемый. <a href="https://github.com/signup" target="_blank" rel="noopener">Перейти к регистрации →</a>',
+      desc: 'Нужна только почта. Никнейм станет частью адреса сайта: <code>ник.github.io</code> — выбирайте лаконичный. <a href="https://github.com/signup" target="_blank" rel="noopener">Перейти к регистрации →</a>',
       img: 'images/github-register.png'
     },
     {
       num: '02',
       title: 'Создайте репозиторий',
-      desc: 'Кнопка <strong>New repository</strong> → имя, например <code>float-viz</code> → тип <strong>Public</strong> → Create repository. Галочку «Add a README» можно не ставить.',
+      desc: 'Кнопка <strong>New repository</strong> → имя, например <code>test</code> → тип <strong>Public</strong> → Create repository. Галочку «Add a README» можно не ставить.',
       img: 'images/github-repo.png'
     },
     {
@@ -811,7 +811,7 @@
     },
     {
       title: 'Ссылка «не открывается» у других',
-      desc: 'Репозиторий приватный. Для бесплатного Pages он должен быть <strong>публичным</strong>.'
+      desc: 'Репозиторий приватный. Для Pages он должен быть <strong>публичным</strong>.'
     }
   ];
 
@@ -901,7 +901,7 @@
     });
     return el('section', { id: 'plan' }, [
       el('div', { class: 'container' }, [
-        sectionHead('Блок 01', 'План: конвейер создания сайта', 'Шесть шагов от идеи до работающего приложения. Каждый шаг — это действие, которое вы сделаете сегодня.'),
+        sectionHead('Блок 01', 'План: конвейер создания сайта', 'Шесть шагов от идеи до работающего приложения.'),
         pipeline
       ])
     ]);
@@ -1153,35 +1153,60 @@
   }
 
   function renderDeploy() {
-    const intro = el('div', { class: 'card' });
-    intro.appendChild(el('div', { style: 'font-size:15px;font-weight:600;color:var(--fg);margin-bottom:10px' }, 'Что нужно понять перед началом'));
-    const ul = el('ul', { style: 'margin:0;padding-left:18px;color:var(--fg-2);font-size:14.5px;line-height:1.6' });
-    ul.appendChild(el('li', {}, [el('strong', {}, 'index.html'), ' — точка входа. Именно этот файл откроется, когда кто-то перейдёт по ссылке. Назовите главный файл именно так.']));
-    ul.appendChild(el('li', {}, [el('strong', {}, 'Относительные пути'), ' — если у вас несколько файлов, создавайте папки, указывая в названии файла их имя: ', el('code', {}, 'images/foto.png'), '.']));
-    ul.appendChild(el('li', {}, [el('strong', {}, 'Публичность'), ' — Pages доступен для публичных репозиториев. Не выкладывайте ничего личного: страницу увидит весь интернет.']));
-    intro.appendChild(ul);
-
     const dictCard = el('div', { class: 'card' });
-    dictCard.appendChild(el('div', { style: 'font-size:15px;font-weight:600;color:var(--fg);margin-bottom:10px' }, 'Словарь на пять минут'));
+    dictCard.appendChild(el('div', { style: 'font-size:15px;font-weight:600;color:var(--fg);margin-bottom:10px' }, 'Тезаурус'));
     const dictTable = el('table', { class: 'dict-table' });
     dictTable.appendChild(el('thead', {}, [
       el('tr', {}, [
         el('th', {}, 'Термин'),
         el('th', {}, 'Что это'),
-        el('th', {}, 'Аналогия для учителя')
+        el('th', {}, 'Простыми словами')
       ])
     ]));
     const dictBody = el('tbody');
     [
-      ['Репозиторий', 'Папка проекта с историей изменений', 'Папка с работами ученика + журнал правок'],
-      ['Коммит', 'Сохранённая версия изменений', '«Сохранить как» с комментарием, что изменилось'],
-      ['Ветка (main)', 'Основная линия версий проекта', 'Чистовик (черновики — другие ветки)'],
-      ['Pages', 'Бесплатный хостинг статики из репозитория', 'Вывесить чистовик на школьную стену']
+      ['Репозиторий', 'Хранилище, в котором лежат все файлы проекта и полная история их изменений, включая все сохранённые версии', 'Все файлы и их история'],
+      ['Коммит', 'Зафиксированное в истории состояние файлов проекта с уникальным идентификатором, автором, датой и комментарием о том, что изменилось', 'Сохранение изменений'],
+      ['Ветка (main)', 'Основная ветка репозитория, в которой находится стабильная версия проекта; от неё создаются другие ветки для отдельных задач', 'Основной вариант проекта'],
+      ['Pages', 'Сервис, который автоматически публикует статические файлы из репозитория и делает их доступными по ссылке в интернете', 'Показ сайта в интернете']
     ].forEach(function(row) {
       dictBody.appendChild(el('tr', {}, row.map(function(cell) { return el('td', {}, cell); })));
     });
     dictTable.appendChild(dictBody);
     dictCard.appendChild(dictTable);
+    
+    const intro = el('div', { class: 'card' });
+    intro.appendChild(el('div', { style: 'font-size:15px;font-weight:600;color:var(--fg);margin-bottom:10px' }, 'Что нужно понять перед началом'));
+    const ul = el('ul', { style: 'margin:0;padding-left:18px;color:var(--fg-2);font-size:14.5px;line-height:1.6' });
+     
+    ul.appendChild(el('li', {}, [el('strong', {}, 'Статический хостинг'), ' — это раздача готовых файлов «как есть». HTML, CSS и JavaScript работают; серверный код (PHP, Python и т.п.) — нет.']));
+    ul.appendChild(el('li', {}, [el('strong', {}, 'index.html'), ' — точка входа. Именно этот файл откроется, когда кто-то перейдёт по ссылке. Назовите главный файл именно так!']));
+    ul.appendChild(el('li', {}, [el('strong', {}, 'Относительные пути'), ' — если у вас несколько файлов, создавайте папки, указывая в названии файла их имя: ', el('code', {}, 'images/foto.png'), '.']));
+    ul.appendChild(el('li', {}, [el('strong', {}, 'Публичность'), ' — Pages доступен для публичных репозиториев. Не выкладывайте ничего личного: страницу увидит весь интернет.']));
+    intro.appendChild(ul);
+
+    const compareCard = el('div', { class: 'card' });
+    compareCard.appendChild(el('div', { style: 'font-size:15px;font-weight:600;color:var(--fg);margin-bottom:10px' }, 'GitHub vs GitVerse — что выбрать'));
+    const cmpTable = el('table', { class: 'compare-table' });
+    cmpTable.appendChild(el('thead', {}, [
+      el('tr', {}, [
+        el('th', {}, 'Параметр'),
+        el('th', {}, 'GitHub Pages'),
+        el('th', {}, 'GitVerse Pages')
+      ])
+    ]));
+    const cmpBody = el('tbody');
+    [
+      ['Адрес сайта', 'ник.github.io/репо', 'ник.gitverse.site/репо'],
+      ['Регистрация', 'почта', 'почта или Сбер ID'],
+      ['Включение', 'Settings → Pages → Deploy from a branch', 'Настройки → Страницы → источник «Ветка»'],
+      ['Ограничения', 'только статика', 'только статика; относительные пути'],
+      ['Кому удобен', 'всем, крупнейшее комьюнити', 'тем, кто работает в РФ']
+    ].forEach(function(row) {
+      cmpBody.appendChild(el('tr', {}, row.map(function(cell) { return el('td', {}, cell); })));
+    });
+    cmpTable.appendChild(cmpBody);
+    compareCard.appendChild(cmpTable);
 
     const tabs = el('div', { class: 'tabs' });
     const tabGh = el('button', { class: 'tab active', 'data-tab': 'github' }, 'GitHub Pages');
@@ -1221,29 +1246,6 @@
     });
     gvPanel.appendChild(gvSteps);
 
-    const compareCard = el('div', { class: 'card' });
-    compareCard.appendChild(el('div', { style: 'font-size:15px;font-weight:600;color:var(--fg);margin-bottom:10px' }, 'GitHub vs GitVerse — что выбрать'));
-    const cmpTable = el('table', { class: 'compare-table' });
-    cmpTable.appendChild(el('thead', {}, [
-      el('tr', {}, [
-        el('th', {}, 'Параметр'),
-        el('th', {}, 'GitHub Pages'),
-        el('th', {}, 'GitVerse Pages')
-      ])
-    ]));
-    const cmpBody = el('tbody');
-    [
-      ['Адрес сайта', 'ник.github.io/репо', 'ник.gitverse.site/репо'],
-      ['Регистрация', 'почта', 'почта или Сбер ID'],
-      ['Включение', 'Settings → Pages → Deploy from a branch', 'Настройки → Страницы → источник «Ветка»'],
-      ['Ограничения', 'только статика', 'только статика; относительные пути'],
-      ['Кому удобен', 'всем, крупнейшее комьюнити', 'тем, кто работает в РФ']
-    ].forEach(function(row) {
-      cmpBody.appendChild(el('tr', {}, row.map(function(cell) { return el('td', {}, cell); })));
-    });
-    cmpTable.appendChild(cmpBody);
-    compareCard.appendChild(cmpTable);
-
     return el('section', { id: 'deploy' }, [
       el('div', { class: 'container' }, [
         sectionHead('Блок 05', 'GitHub и GitVerse', 'Файл на вашем компьютере видите только вы. Деплой превращает его в ссылку, которую можно отправить, показать на проекторе или зашить в QR-код.'),
@@ -1267,7 +1269,7 @@
     });
     return el('section', { id: 'errors' }, [
       el('div', { class: 'container' }, [
-        sectionHead('Блок 06', 'Частые ошибки и как их чинить', 'Четыре типичные проблемы и их решения. Сохраните этот блок — он пригодится на практике.'),
+        sectionHead('Блок 06', 'Частые ошибки и как их чинить', 'Четыре типичные проблемы и их решения.'),
         grid
       ])
     ]);
