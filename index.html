@@ -1249,12 +1249,12 @@
     return el('section', { id: 'deploy' }, [
       el('div', { class: 'container' }, [
         sectionHead('Блок 05', 'GitHub и GitVerse', 'Файл на вашем компьютере видите только вы. Деплой превращает его в ссылку, которую можно отправить, показать на проекторе или зашить в QR-код.'),
-        intro,
         dictCard,
+        intro,
+        compareCard,
         tabs,
         ghPanel,
-        gvPanel,
-        compareCard
+        gvPanel
       ])
     ]);
   }
