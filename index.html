@@ -55,7 +55,6 @@
   a:hover { text-decoration: underline; }
   input, textarea { font: inherit; color: inherit; }
 
-  /* Единый шрифт для code — наследуем от body, без моноширинного */
   code {
     font-family: inherit;
     font-size: inherit;
@@ -241,9 +240,6 @@
   .example-screenshot {
     aspect-ratio: 16 / 10;
     background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid var(--border);
@@ -256,18 +252,15 @@
       linear-gradient(135deg, transparent 48%, rgba(37,99,235,0.04) 49%, rgba(37,99,235,0.04) 51%, transparent 52%),
       linear-gradient(45deg, transparent 48%, rgba(37,99,235,0.04) 49%, rgba(37,99,235,0.04) 51%, transparent 52%);
     background-size: 20px 20px;
+    z-index: 0;
   }
-  .screenshot-label {
+  .example-screenshot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
     position: relative;
-    background: rgba(255,255,255,0.9);
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 11px;
-    color: var(--muted);
-    border: 1px dashed var(--border-strong);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    z-index: 1;
   }
   .example-body {
     padding: 16px 18px;
@@ -479,9 +472,6 @@
     aspect-ratio: 16 / 9;
     background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
     border-radius: var(--radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border: 1px dashed var(--border-strong);
     position: relative;
     overflow: hidden;
@@ -494,6 +484,15 @@
       linear-gradient(135deg, transparent 48%, rgba(37,99,235,0.04) 49%, rgba(37,99,235,0.04) 51%, transparent 52%),
       linear-gradient(45deg, transparent 48%, rgba(37,99,235,0.04) 49%, rgba(37,99,235,0.04) 51%, transparent 52%);
     background-size: 16px 16px;
+    z-index: 0;
+  }
+  .step-screenshot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 1;
   }
 
   .tabs {
@@ -912,7 +911,7 @@
     EXAMPLES.forEach(function(ex) {
       const card = el('div', { class: 'example-card' }, [
         el('div', { class: 'example-screenshot' }, [
-          el('div', { class: 'screenshot-label', html: ICONS.image + ' ' + ex.img })
+          el('img', { src: ex.img, alt: ex.title, style: 'width:100%;height:100%;object-fit:cover;' })
         ]),
         el('div', { class: 'example-body' }, [
           el('div', { class: 'example-title' }, ex.title),
@@ -1136,7 +1135,7 @@
       ]);
       if (s.img) {
         content.appendChild(el('div', { class: 'step-screenshot' }, [
-          el('div', { class: 'screenshot-label', html: ICONS.image + ' ' + s.img })
+          el('img', { src: s.img, alt: s.title, style: 'width:100%;height:100%;object-fit:cover;' })
         ]));
       }
       steps.appendChild(el('div', { class: 'step' }, [
@@ -1198,7 +1197,7 @@
       ]);
       if (s.img) {
         content.appendChild(el('div', { class: 'step-screenshot' }, [
-          el('div', { class: 'screenshot-label', html: ICONS.image + ' ' + s.img })
+          el('img', { src: s.img, alt: s.title, style: 'width:100%;height:100%;object-fit:cover;' })
         ]));
       }
       ghSteps.appendChild(el('div', { class: 'step' }, [
